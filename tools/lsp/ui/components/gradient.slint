@@ -32,7 +32,8 @@ export component GradientDot inherits Rectangle {
     border-color: gray;
     TouchArea {
         clicked => {
-            if !root.selected {;
+            if !root.selected {
+                ;
                 new-selection();
             }
         }
@@ -47,14 +48,14 @@ component EditGradientWidget inherits VerticalLayout {
     padding: EditorSpaceSettings.default-padding;
     spacing: 8px;
 
-    grad:=Rectangle {
+    grad := Rectangle {
         height: 40px;
-        background: @linear-gradient(90deg, #fff 0%, #000 100%);
+        background: @linear-gradient(90deg, #fff 0%, #f00 15%, #0af 60%, #000 100%);
         Rectangle {
             height: 1px;
             background: grey;
-            for i[index] in [{ pos:0, value:#fff }, { pos:100, value:#000 }]: GradientDot {
-                selected:false;
+            for i[index] in [{ pos:0, value:#fff }, { pos:15, value:#f00 },{ pos:60, value:#0af },{ pos:100, value:#000 }]: GradientDot {
+                selected: false;
                 new-selection => {
                     self.selected = true;
                 }
@@ -64,34 +65,42 @@ component EditGradientWidget inherits VerticalLayout {
         }
     }
 
-    content:=HorizontalLayout {
-        
+    VerticalLayout {
         alignment: stretch;
         spacing: 8px;
         vertical-stretch: 0;
-        HorizontalLayout {
+        content := HorizontalLayout {
+            alignment: start;
+            spacing: EditorSpaceSettings.default-spacing;
             Text {
                 vertical-alignment: center;
                 text: "Type:";
             }
 
-            ComboBox {
+            cb-type:=ComboBox {
                 horizontal-stretch: 0;
-                width: 80%;
+                width: 9rem;
                 model: ["linear", "radial"];
             }
         }
 
         HorizontalLayout {
-            alignment: end;
-            spacing: 4px;
+            visible: cb-type.current-value == "linear";
+            height: content.preferred-height;
+            alignment: start;
+            spacing: EditorSpaceSettings.default-spacing;
             Text {
                 vertical-alignment: center;
                 text: "Angle:";
             }
+            LineEdit {
+                text: "-30";
+                horizontal-alignment: right;
+                width: 5rem;
+            }
 
             ComboBox {
-                width: 80%;
+                width: 8rem;
                 model: [
                     "Deg",
                     "rad",
@@ -99,11 +108,9 @@ component EditGradientWidget inherits VerticalLayout {
             }
 
             VerticalLayout {
-                Rectangle {
-                    border-radius: self.width;
-                    width: 20px;
-                    height: 20px;
-                    background: grey;
+                Image {
+                    source: @image-url("../assets/dial.svg");
+                    colorize: Palette.alternate-foreground.transparentize(0.6);
                 }
             }
         }
@@ -119,33 +126,41 @@ component EditGradientWidget inherits VerticalLayout {
                 width: 9rem;
                 text: "#ffffffff";
             }
+
             Rectangle {
                 background: #fff;
                 width: 40px;
-                height: 25px;
             }
         }
+
         HorizontalLayout {
             spacing: 4px;
             Text {
                 vertical-alignment: center;
                 text: "Position:";
             }
+
             LineEdit {
                 text: "0";
                 width: 5rem;
             }
         }
     }
+    Rectangle {height: EditorSpaceSettings.default-spacing;}
     HorizontalLayout {
         height: content.preferred-height;
         spacing: EditorSpaceSettings.default-spacing;
-        Button {text: "Reset";}
-        Button {text: "Code";}
-    }
+        Button {
+            text: "Reset";
+        }
 
+        Button {
+            text: "Code";
+        }
+    }
 }
+
 export component Example inherits Window {
     width: 360px;
-    EditGradientWidget {}
+    EditGradientWidget { }
 }
