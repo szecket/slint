@@ -64,7 +64,8 @@ component EditGradientWidget inherits VerticalLayout {
         }
     }
 
-    HorizontalLayout {
+    content:=HorizontalLayout {
+        
         alignment: stretch;
         spacing: 8px;
         vertical-stretch: 0;
@@ -109,6 +110,7 @@ component EditGradientWidget inherits VerticalLayout {
     }
 
     HorizontalLayout {
+        height: content.preferred-height;
         alignment: space-between;
         spacing: 4px;
         HorizontalLayout {
@@ -136,6 +138,7 @@ component EditGradientWidget inherits VerticalLayout {
         }
     }
     HorizontalLayout {
+        height: content.preferred-height;
         spacing: EditorSpaceSettings.default-spacing;
         Button {text: "Reset";}
         Button {text: "Code";}
