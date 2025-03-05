@@ -128,7 +128,7 @@ component RowMenuItem inherits Rectangle {
         Rectangle {
             height: EditorSpaceSettings.default-spacing/2;
         }
-    Text { 
+    Text {
         text: text;
         color: ta.has-hover ? Palette.background : Palette.foreground;
     }
@@ -236,9 +236,9 @@ export component Spreadsheet inherits ScrollView {
                 }
             ]
         ],
-        
+
     };
-    
+
     property <CellData> current-cell;
     property <bool> edit-window-visible: false;
     private property <length> selection-x;
