@@ -125,6 +125,10 @@ export component PreviewUi inherits Window {
                                     PreviewDataView {
                                         opacity: preview.preview-is-current ? 1.0 : 0.3;
                                         enabled: preview.preview-is-current;
+                                        edit-in-spreadsheet(rp) => {
+                                            ss.current-table = Api.current-table;
+                                            ss.visible = true;
+                                        }
                                     }
                                 }
                             }
@@ -141,5 +145,7 @@ export component PreviewUi inherits Window {
     if Api.diagnostic-summary == DiagnosticSummary.Errors: OutOfDateBox {
         x: (parent.width - self.width) / 2;
         y: (parent.height / 10);
+    }
+    ss:=SpreadsheetDialog {       
     }
 }

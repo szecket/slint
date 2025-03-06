@@ -891,7 +891,7 @@ component EditMultiValueWidget inherits VerticalLayout {
     Button {
         text: preview-data.has-setter ? @tr("Edit") : @tr("View");
         clicked => {
-            root.edit-in-spreadsheet(root.property-group-name, root.preview-data, [[ ]]);
+            root.edit-in-spreadsheet(root.property-group-name, root.preview-data, [[property-value]]);
         }
     }
 }
@@ -1231,7 +1231,7 @@ export component PreviewDataPropertyValueWidget inherits VerticalLayout {
     private property <PropertyValue> value: Api.get-property-value(root.property-container-id, root.preview-data.name);
     private property <string> possible-error;
 
-    callback edit-in-spreadsheet(rp: PropertyContainer);
+    callback edit-in-spreadsheet(rp:PropertyContainer);
 
     function reset-action() {
         self.set-code-binding(self.value.code);
@@ -1285,9 +1285,11 @@ export component PreviewDataPropertyValueWidget inherits VerticalLayout {
             return(root.set-code-binding(is_translated ? "\"\{text}\"" : text));
         }
     }
-    if root.preview-data.kind == PreviewDataKind.Table && false: EditMultiValueWidget {
-        edit-in-spreadsheet(property-group-name, data, values) => {
-            debug("edit-in-spreadsheet TRIGGERED: ", property-group-name, data, values);
+    if root.preview-data.kind == PreviewDataKind.Table: EditMultiValueWidget {
+        edit-in-spreadsheet(property-group-name, preview-data, values) => {
+            debug("edit-in-spreadsheet TRIGGERED");
+            debug("name:",preview-data.name);
+            Api.current-table = Api.get-property-value-table(property-group-name, preview-data.name);
         }
     }
     if root.preview-data.kind == PreviewDataKind.Json: EditJsonWidget {

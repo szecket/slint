@@ -120,29 +120,9 @@ component Cell inherits Rectangle {
     }
 }
 
-component RowMenuItem inherits Rectangle {
-    in property <string> text;
-    width: 100%;
-    background: ta.has-hover ? Palette.accent-background : transparent;
-    VerticalLayout {
-        padding:EditorSpaceSettings.default-padding;
-        Rectangle {
-            height: EditorSpaceSettings.default-spacing/2;
-        }
-    Text {
-        text: text;
-        color: ta.has-hover ? Palette.background : Palette.foreground;
-    }
-    Rectangle {
-        height: EditorSpaceSettings.default-spacing/2;
-    }
-
-}
-    ta := TouchArea {}
-}
 export component Spreadsheet inherits ScrollView {
     in property <PreviewData> preview-data: {
-        name: "Addresses",
+        name: "Spreadsheet",
         has-getter: true,
         has-setter: true,
         kind: PreviewDataKind.Table,
@@ -306,18 +286,6 @@ export component Spreadsheet inherits ScrollView {
         y: current-cell.y - EditorSpaceSettings.default-padding;
         current-cell: current-cell;
         save(new-value) => {
-            // Update the specific field based on col index
-            // if (current-cell.col == 0) {
-            //     addresses[current-cell.row].type = new-value;
-            // } else if (current-cell.col == 1) {
-            //     addresses[current-cell.row].street = new-value;
-            // } else if (current-cell.col == 2) {
-            //     addresses[current-cell.row].city = new-value;
-            // } else if (current-cell.col == 3) {
-            //     addresses[current-cell.row].state = new-value;
-            // } else if (current-cell.col == 4) {
-            //     addresses[current-cell.row].zip = new-value;
-            // }
             root.edit-window-visible = false;
         }
         close-editor => {
