@@ -1018,6 +1018,8 @@ export component PropertyValueWidget inherits VerticalLayout {
 
     callback reset-action();
     callback code-action();
+    height <=> self.preferred-height;
+    width <=> self.preferred-width;
 
     VerticalLayout {
         Rectangle {
