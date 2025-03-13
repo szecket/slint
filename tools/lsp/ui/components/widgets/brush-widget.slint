@@ -173,8 +173,13 @@ export component BrushWidget inherits GridLayout {
 
             Rectangle {
                 clip: true;
-                height: root.current-brush-kind == BrushKind.linear ? angle.height : 0px;
-            
+                height: root.current-brush-kind == BrushKind.linear ? self.preferred-height : 0px;
+            HorizontalLayout {
+                spacing: EditorSpaceSettings.default-spacing;
+                VerticalLayout {
+                    alignment: center;
+                    Text {text: "Angle:";}
+                }
                 angle := ResettingLineEdit {
                     enabled <=> root.enabled;
 
@@ -192,9 +197,8 @@ export component BrushWidget inherits GridLayout {
                         root.set-brush-binding(root.current-brush-kind, root.current-angle, root.current-color, root.current-gradient-stops);
                         update-brush();
                     }
-                    
                 }
-            }
+            }}
 
             sliders := RgbaColorSliders {
                 enabled: root.enabled && (root.current-brush-kind == BrushKind.solid || grad_main.current-selected-index >= 0);
