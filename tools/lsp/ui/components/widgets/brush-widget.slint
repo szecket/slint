@@ -8,7 +8,7 @@ import { GradientMainContent } from "./gradient-basics.slint";
 import { Api, BrushKind, ColorData, GradientStop, PropertyValue, PropertyValueKind } from "../../api.slint";
 import { EditorSpaceSettings } from "../../components/styling.slint";
 
-import { ComboBox } from "std-widgets.slint";
+import { ComboBox, Palette } from "std-widgets.slint";
 
 export component BrushWidget inherits GridLayout {
     in property <bool> enabled;
@@ -32,7 +32,7 @@ export component BrushWidget inherits GridLayout {
     private property <BrushKind> current-brush-kind;
     private property <float> current-angle;
 
-    spacing: EditorSpaceSettings.default-spacing;
+    spacing-vertical: EditorSpaceSettings.default-spacing;
     width: 100%;
 
     function update-brush() {
@@ -197,6 +197,12 @@ export component BrushWidget inherits GridLayout {
                         root.set-brush-binding(root.current-brush-kind, root.current-angle, root.current-color, root.current-gradient-stops);
                         update-brush();
                     }
+                }
+                Image {
+                    source: @image-url("../../assets/dial.svg");
+                    height: 30px;
+                    rotation-angle: current-angle * 1deg;
+                    colorize: Palette.foreground.transparentize(0.8);
                 }
             }}
 
