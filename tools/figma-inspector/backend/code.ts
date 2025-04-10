@@ -43,7 +43,7 @@ figma.on("selectionchange", () => {
     }
 });
 
-j("exportToFiles", async () => {
+onUiMessage("exportToFiles", async () => {
     try {
         const exportedFiles = await exportFigmaVariablesToSeparateFiles();
         console.log(`Exported ${exportedFiles.length} collection files`);
@@ -62,7 +62,7 @@ j("exportToFiles", async () => {
         figma.notify("Failed to export to files", { error: true });
     }
 });
-function j(messageType: string, callback: () => Promise<void>) {
+function onUiMessage(messageType: string, callback: () => Promise<void>) {
     console.log(`Registering handler for ${messageType}`);
 
     // We need to create a listener specifically for this message type
@@ -98,7 +98,7 @@ const variableMonitoring: {
 const DEBOUNCE_INTERVAL = 3000; // 3 seconds
 
 // Replace your monitorVariableChanges handler
-j("monitorVariableChanges", async () => {
+onUiMessage("monitorVariableChanges", async () => {
     console.log("Setting up variable change monitoring in plugin");
 
     // Set up event listeners for variable changes
@@ -172,7 +172,7 @@ j("monitorVariableChanges", async () => {
 });
 
 // Replace your checkVariableChanges handler
-j("checkVariableChanges", async () => {
+onUiMessage("checkVariableChanges", async () => {
     try {
         // Use the async version as required
         const collections =
