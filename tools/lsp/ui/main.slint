@@ -3,10 +3,10 @@
 
 // cSpell: ignore Heade
 
-import { Button, TabWidget } from "std-widgets.slint";
+import { Button, TabWidget, Palette } from "std-widgets.slint";
 import { Api, ComponentItem, DiagnosticSummary } from "api.slint";
 
-import { EditorSizeSettings, EditorSpaceSettings, Icons, PickerStyles, ConsoleStyles } from "./components/styling.slint";
+import { EditorSizeSettings, EditorSpaceSettings, Icons, PickerStyles, ConsoleStyles, ConsoleStyles } from "./components/styling.slint";
 import { StatusLine } from "./components/status-line.slint";
 import { HeaderView } from "./views/header-view.slint";
 import { LibraryView } from "./views/library-view.slint";
@@ -146,22 +146,8 @@ export component PreviewUi inherits Window {
                                             }
 
                                             w1 := PropertyView {
-                                                height: (parent.height - splitter.height) * ratio;
                                                 opacity: preview.preview-is-current ? 1.0 : 0.3;
                                                 enabled: preview.preview-is-current;
-                                            }
-                                        }
-
-                                        splitter := TouchArea {
-                                            y: w1.height;
-                                            height: 3px;
-                                            moved => {
-                                                ratio = Math.clamp((self.y + self.mouse-y - self.pressed-y) / (parent.height - splitter.height), 0, 1);
-                                            }
-                                            mouse-cursor: ns-resize;
-
-                                            Rectangle {
-                                                background: Palette.border;
                                             }
                                         }
                                     }

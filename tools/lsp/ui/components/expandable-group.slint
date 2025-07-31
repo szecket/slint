@@ -8,7 +8,7 @@ import { StateLayer } from "../components/state-layer.slint";
 
 import { EditorAnimationSettings, EditorSizeSettings, EditorSpaceSettings, Icons } from "../components/styling.slint";
 
-export component ExpandableGroup  {
+export component ExpandableGroup {
     in property <bool> enabled;
     in property <string> text;
     in property <length> panel-width;
@@ -17,6 +17,7 @@ export component ExpandableGroup  {
 
     group-layer := Rectangle {
         content-layer := VerticalLayout {
+            padding-top: EditorSpaceSettings.default-padding;
             if text != "": Rectangle {
                 touch-area := TouchArea {
                     clicked => {
@@ -26,8 +27,8 @@ export component ExpandableGroup  {
 
                 state-layer := StateLayer {
                     width: panel-width;
-                    height: group-layer.height;
-                    y: group-layer.y;
+                    height: group-layer.height + EditorSpaceSettings.default-padding;
+                    y: group-layer.y - EditorSpaceSettings.default-padding;
                     has-hover: touch-area.has-hover;
                     pressed: touch-area.pressed;
                 }
