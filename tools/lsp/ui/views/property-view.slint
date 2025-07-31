@@ -6,7 +6,7 @@ import { Palette, ScrollView }  from "std-widgets.slint";
 import { ExpandableGroup } from "../components/expandable-group.slint";
 
 import { Api, ElementInformation, PropertyGroup, PropertyInformation } from "../api.slint";
-import { EditorSpaceSettings, EditorSizeSettings } from "../components/styling.slint";
+import { EditorSpaceSettings, EditorSizeSettings, ConsoleStyles } from "../components/styling.slint";
 
 import { PropertyInformationWidget } from "../components/property-widgets.slint";
 
@@ -27,6 +27,7 @@ export component PropertyView inherits ScrollView {
             vertical-alignment: center;
             vertical-stretch: 1;
         }
+
         if root.element-loaded: groups := VerticalLayout {
             alignment: start;
 
@@ -52,4 +53,3 @@ export component PropertyView inherits ScrollView {
         }
     }
 }
-

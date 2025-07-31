@@ -2,12 +2,11 @@
 // SPDX-License-Identifier: GPL-3.0-only OR LicenseRef-Slint-Royalty-free-2.0 OR LicenseRef-Slint-Software-3.0
 
 import { Palette } from "std-widgets.slint";
-import { EditorFontSettings } from "./styling.slint";
+import { EditorFontSettings, ConsoleStyles } from "./styling.slint";
 
 export component HeaderText inherits Text {
     font-family: "Inter";
     vertical-alignment: center;
-    color: Palette.foreground;
+    color: ConsoleStyles.text-color;
     font-size: EditorFontSettings.header.font-size;
-    font-weight: EditorFontSettings.header.font-weight;
 }
