@@ -57,7 +57,7 @@ export component FloatWidget inherits GridLayout {
         apply-value();
     }
 
-    spacing-vertical: EditorSpaceSettings.default-spacing;
+    // spacing-vertical: EditorSpaceSettings.default-spacing;
 
     Row {
         NameLabel {
@@ -89,11 +89,9 @@ export component FloatWidget inherits GridLayout {
                 edited(text) => {
                     self.can-compile = root.test-binding();
                 }
-
                 accepted(text) => {
                     root.set-binding();
                 }
-
                 changed has-focus => {
                     if !self.has-focus {
                         root.apply-value();
